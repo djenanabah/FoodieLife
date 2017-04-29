@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FoodieLife</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_login">Log in</string>
+    <string name="prompt_nickname">Nickname</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_log_in">Log In</string>
+    <string name="action_register">Register</string>
 </resources>
