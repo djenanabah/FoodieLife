@@ -174,6 +174,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Name.setText(userInfo.getName());
             Email.setText(userInfo.geteMail());
             Glide.with(this).load(userInfo.getPictureUrl()).into(Prof_Pic);
+        Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+        intent.putExtra("UserClientInfo", userInfo);
+        startActivity(intent);
         updateUI(true);
     }
 
