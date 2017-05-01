@@ -61,8 +61,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                addRestaurant();
             }
         });
 
@@ -148,8 +149,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
 
-        mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+        Intent intent = new Intent(this, RestaurantFormActivity.class);
+        intent.putExtra("latitude", location.getLatitude());
+        intent.putExtra("longitude", location.getLongitude());
+        this.startActivity(intent);
+
+       /* mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));*/
     }
 
     // Functions related to map and GPS
@@ -170,9 +176,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
         // Add a marker in Sydney and move the camera
+        /*
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
     /**
