@@ -53,7 +53,7 @@ public class RestClientUsage {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.i("RestClientUsage", "OnSuccess");
-                ((LoginActivity)activity).updateUserInfo(response, response.toString());
+                ((LoginActivity)activity).updateUserInfo(response);
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)

@@ -19,15 +19,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -46,16 +50,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager lm;
     private RestClientUsage client;
     private UserClientInfo userClientInfo;
+    private TextView userName, userEmail;
+    private ImageView userPicture;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        //get param UserClientInfo
         Intent intent = getIntent();
+        userClientInfo = (UserClientInfo)intent.getSerializableExtra("UserClientInfo");
+        Log.i("clientInfo name", userClientInfo.getName());
 
         client = new RestClientUsage(this);
-        userClientInfo = (UserClientInfo)intent.getSerializableExtra("UserClientInfo");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -100,9 +109,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        initUserViewInfo();
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    private void initUserViewInfo(){
+        userName = (TextView)findViewById(R.id.userName);
+        userEmail = (TextView)findViewById(R.id.userEmail);
+        userPicture = (ImageView)findViewById(R.id.userPicture);
+        userName.setText(userClientInfo.getName());
+        userEmail.setText(userClientInfo.geteMail());
+        Glide.with(this).load(userClientInfo.getPictureUrl()).into(userPicture);
     }
 
     @Override

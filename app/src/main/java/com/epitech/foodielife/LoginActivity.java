@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private LinearLayout Prof_section;
     private Button SignOut;
     private SignInButton SignIn;
-    private TextView Name, Email;
-    private ImageView Prof_Pic;
     private GoogleApiClient googleApiClient;
     private UserClientInfo userInfo;
     private RestClientUsage rclientUsage;
@@ -60,9 +58,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Prof_section = (LinearLayout)findViewById(R.id.prof_section);
         SignOut = (Button)findViewById(R.id.bn_logout);
         SignIn = (SignInButton)findViewById(R.id.bn_login);
-        Name = (TextView)findViewById(R.id.name);
-        Email = (TextView)findViewById(R.id.email);
-        Prof_Pic = (ImageView)findViewById(R.id.prof_pic);
 
         // Button click listeners
         SignIn.setOnClickListener(this);
@@ -155,14 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
-    public void updateUserInfo(JSONObject response, String jsonInString) {
-        ObjectMapper mapper = new ObjectMapper();
-        Log.i("Json NABA", jsonInString);
-        try {
-            UserClientInfo us =  mapper.readValue(jsonInString, UserClientInfo.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void updateUserInfo(JSONObject response) {
         try {
             userInfo.setName(response.getString("name"));
             userInfo.setPictureUrl(response.getString("pictureUrl"));
@@ -171,13 +159,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
         }
-            Name.setText(userInfo.getName());
-            Email.setText(userInfo.geteMail());
-            Glide.with(this).load(userInfo.getPictureUrl()).into(Prof_Pic);
         Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
         intent.putExtra("UserClientInfo", userInfo);
         startActivity(intent);
-        updateUI(true);
+        signOut();
     }
 
     @Override
