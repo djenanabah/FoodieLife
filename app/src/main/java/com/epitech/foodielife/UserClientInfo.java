@@ -1,9 +1,5 @@
 package com.epitech.foodielife;
 
-/**
- * Created by djena on 30/04/2017.
- */
-
 import java.io.Serializable;
 
 public class UserClientInfo implements Serializable{
@@ -55,3 +51,5 @@ public class UserClientInfo implements Serializable{
     }
 
 }
+
+

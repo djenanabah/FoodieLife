@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInApi;
@@ -27,6 +28,8 @@ import com.google.android.gms.common.api.Status;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Created by Tsy-jon on 30/04/2017.
@@ -134,24 +137,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (JSONException e){
                 Log.d(TAG, "JSONException: " + e.getMessage());
             }
-
-            // Jackson json = new JacksonFactory();
-           //String s = serializer.;
-
-            /*String name = account.getDisplayName();
-            String email = account.getEmail();
-            String img_url = account.getPhotoUrl().toString();
-            Name.setText(name);
-            Email.setText(email);
-            Glide.with(this).load(img_url).into(Prof_Pic);*/
-            //updateUI(true);
         }
         else {
             updateUI(false);
         }
 
     }
-    public void updateUI(boolean isLogin){
+    private void updateUI(boolean isLogin){
         if (isLogin){
             //ToDo: go to the mapsActivity
             Prof_section.setVisibility(View.VISIBLE);
@@ -162,6 +154,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SignIn.setVisibility(View.VISIBLE);
         }
 
+    }
+    public void updateUserInfo(JSONObject response, String jsonInString) {
+        ObjectMapper mapper = new ObjectMapper();
+        Log.i("Json NABA", jsonInString);
+        try {
+            UserClientInfo us =  mapper.readValue(jsonInString, UserClientInfo.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            userInfo.setName(response.getString("name"));
+            userInfo.setPictureUrl(response.getString("pictureUrl"));
+            userInfo.seteMail(response.getString("eMail"));
+            userInfo.setToken(response.getString("token"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+            Name.setText(userInfo.getName());
+            Email.setText(userInfo.geteMail());
+            Glide.with(this).load(userInfo.getPictureUrl()).into(Prof_Pic);
+        updateUI(true);
     }
 
     @Override

@@ -17,8 +17,8 @@ public class RestClient {
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        Log.i("url", getAbsoluteUrl(url));
-        Log.i("params", params.toString());
+        /*Log.i("url", getAbsoluteUrl(url));
+        Log.i("params", params.toString());*/
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
