@@ -1,7 +1,11 @@
 package com.epitech.foodielife;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -38,13 +42,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
-
     private GoogleMap mMap;
+    private LocationManager lm;
+    private RestClientUsage client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        client = new RestClientUsage(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,6 +80,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
@@ -83,6 +92,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             super.onBackPressed();
         }
     }
+
+    // Menu Slider
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,8 +123,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.add_restaurant) {
+            addRestaurant();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -131,7 +142,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+    // Restaurant handling
 
+    private void addRestaurant() {
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
+
+        mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+    }
 
     // Functions related to map and GPS
 
@@ -147,7 +166,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
