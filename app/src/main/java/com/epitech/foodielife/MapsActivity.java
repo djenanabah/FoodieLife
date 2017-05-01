@@ -173,6 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent = new Intent(this, RestaurantFormActivity.class);
         intent.putExtra("latitude", location.getLatitude());
         intent.putExtra("longitude", location.getLongitude());
+        intent.putExtra("UserClientInfo", userClientInfo);
         this.startActivity(intent);
 
        /* mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
