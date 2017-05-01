@@ -170,13 +170,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
 
+        mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+
         Intent intent = new Intent(this, RestaurantFormActivity.class);
         intent.putExtra("latitude", location.getLatitude());
         intent.putExtra("longitude", location.getLongitude());
         this.startActivity(intent);
-
-       /* mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));*/
     }
 
     // Functions related to map and GPS
