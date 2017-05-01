@@ -8,16 +8,17 @@ import com.loopj.android.http.*;
  */
 
 public class RestClient {
-    private static final String BASE_URL = "109.17.221.105:8080";
+    private static final String BASE_URL = "http://10.0.2.2:8080/";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        //Log.i("url", getAbsoluteUrl(url));
-        //Log.i("params", params.toString());
+
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        Log.i("url", getAbsoluteUrl(url));
+        Log.i("params", params.toString());
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 

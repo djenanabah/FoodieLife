@@ -8,4 +8,5 @@
     <string name="name_display">Name Display Here</string>
     <string name="email_display">Email Display Here</string>
     <string name="logout_google_account">LogOut Google Account</string>
+    <string name="server_client_id">842390643144-ar17dqtijvv8dbnp0ubaiv17icfq7pv8.apps.googleusercontent.com</string>
 </resources>

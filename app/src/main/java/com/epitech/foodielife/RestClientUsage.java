@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
+
 /**
  * Created by LAU on 27/04/2017.
  */
@@ -22,6 +23,8 @@ import cz.msebera.android.httpclient.Header;
 public class RestClientUsage {
     private final Activity activity;
     public static boolean endRequestAll;
+    private int loginStatus = 0;
+    private JSONObject loginResponse;
 
     public RestClientUsage(Activity activity)
     {
@@ -44,20 +47,34 @@ public class RestClientUsage {
         });
     }*/
 
-    public void login(final String name, final String password) throws JSONException {
+    public void login(final String value) throws JSONException {
+        loginStatus = 0;
         RequestParams params = new RequestParams();
+        params.put("token", value);
 
-        RestClient.get("login", params, new JsonHttpResponseHandler() {
+        RestClient.post("login", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
+                loginStatus = 1;
+                loginResponse = response;
+                ((LoginActivity)activity).updateUI(true);
+                Log.i("RestClientUsage", "OnSuccess");
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
             {
-
+                loginStatus = -1;
+                Log.i("RCU - OnFailure", jsonObject.toString());
             }
         });
+    }
+
+    public JSONObject getLoginResponse(){
+        return loginResponse;
+    }
+
+    public int getLoginStatus(){
+        return loginStatus;
     }
 
 }
