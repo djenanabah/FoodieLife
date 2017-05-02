@@ -67,14 +67,18 @@ public class RestClientUsage {
     public void add_restaurant(UserClientInfo user, Restaurant restaurant)
     {
         RequestParams params = new RequestParams();
-        params.put("token", user.getToken());
-        params.put("restaurant", restaurant);
+        params.put("user", user);
+        params.put("value", restaurant);
         RestClient.post("restaurant/add", params, new JsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject response)
         {
             Log.i("RestClientUsage", "OnSuccess");
-            ((RestaurantFormActivity)activity).addRestaurantSuccess(response);
+            try {
+                ((RestaurantFormActivity)activity).addRestaurantSuccess(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)

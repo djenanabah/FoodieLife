@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -52,10 +53,11 @@ public class RestaurantFormActivity extends AppCompatActivity {
         });
     }
 
-    public void addRestaurantSuccess(JSONObject response)
-    {
-        Intent intent = new Intent(RestaurantFormActivity.this, MapsActivity.class);
-        intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
-        startActivity(intent); // modifier MapsActivity pour qu'il mette le marqueur avant de changer d'activité
+    public void addRestaurantSuccess(JSONObject response) throws JSONException {
+        if (response.getString("message") == "200") {
+            Intent intent = new Intent(RestaurantFormActivity.this, MapsActivity.class);
+            intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
+            startActivity(intent); // modifier MapsActivity pour qu'il mette le marqueur avant de changer d'activité
+        }
     }
 }

@@ -28,7 +28,6 @@
             android:name=".MapsActivity"
             android:label="@string/app_name">
         </activity>
-        <!--activity android:name=".MapsActivity" /-->
         <activity android:name=".RestaurantFormActivity" />
     </application>
 
