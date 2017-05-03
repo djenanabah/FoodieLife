@@ -74,6 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
+
                 addRestaurant();
             }
         });
@@ -175,9 +176,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         intent.putExtra("longitude", location.getLongitude());
         intent.putExtra("UserClientInfo", userClientInfo);
         this.startActivity(intent);
-
-       /* mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));*/
     }
 
     // Functions related to map and GPS
