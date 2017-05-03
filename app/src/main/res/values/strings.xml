@@ -28,5 +28,7 @@
     <string name="get_location_failed">Could not determine current position, please check GPS action status</string>
     <string name="action_add_restaurant">Submit</string>
     <string name="add_restaurant_button_desc">Add Restaurant</string>
-    <string name="add_restaurant_failed">Restaurant was not added, please try again</string>
+    <string name="add_restaurant_failed">Restaurant was not added, please try again later</string>
+
+    <string name="get_restaurants_failed">Could not fetch restaurants, please try again later</string>
 </resources>

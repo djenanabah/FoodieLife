@@ -39,6 +39,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
@@ -94,6 +101,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        client.get_restaurants((UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        client.get_restaurants((UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
     }
 
     @Override
@@ -264,5 +279,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
+    public void getRestaurantsSuccess(JSONObject response) throws JSONException {
+        if (response.getString("message") == "200") {
+            ArrayList<Restaurant> list = (ArrayList<Restaurant>)response.get("list");
+            for (ListIterator<Restaurant> iter = list.listIterator(); iter.hasNext(); ) {
+                Restaurant element = iter.next();
+                LatLng pos = new LatLng(element.getLatitude(), element.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(pos).title(element.getName()));
+            }
+        }
+        else {
+            getRestaurantsFailure();
+        }
+    }
 
+    public void getRestaurantsFailure()
+    {
+        Toast.makeText(this, R.string.get_restaurants_failed, Toast.LENGTH_SHORT).show();
+    }
 }

@@ -86,6 +86,28 @@ public class RestClientUsage {
             ((RestaurantFormActivity)activity).addRestaurantFailure();
             //Log.i("RCU - OnFailure", jsonObject.toString());
         }
-    });
+        });
+    }
+
+    public void get_restaurants(UserClientInfo user)
+    {
+        RequestParams params = new RequestParams();
+        params.put("user", user);
+        RestClient.post("restaurant/add", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+            {
+                try {
+                    ((MapsActivity)activity).getRestaurantsSuccess(response);
+                } catch (JSONException e) {
+                    ((MapsActivity)activity).getRestaurantsFailure();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
+            {
+                ((MapsActivity)activity).getRestaurantsFailure();
+            }
+        });
     }
 }
