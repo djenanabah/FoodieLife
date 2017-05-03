@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,5 +60,13 @@ public class RestaurantFormActivity extends AppCompatActivity {
             intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
             startActivity(intent); // modifier MapsActivity pour qu'il mette le marqueur avant de changer d'activité
         }
+        else {
+            addRestaurantFailure();
+        }
+    }
+
+    public void addRestaurantFailure()
+    {
+        Toast.makeText(this, R.string.add_restaurant_failed, Toast.LENGTH_SHORT).show();
     }
 }

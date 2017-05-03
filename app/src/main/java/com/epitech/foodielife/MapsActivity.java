@@ -74,6 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
+
                 addRestaurant();
             }
         });
@@ -169,9 +170,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void addRestaurant() {
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-
-        mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
 
         Intent intent = new Intent(this, RestaurantFormActivity.class);
         intent.putExtra("latitude", location.getLatitude());

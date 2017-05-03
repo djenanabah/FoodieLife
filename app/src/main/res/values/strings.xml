@@ -27,4 +27,5 @@
 
     <string name="action_add_restaurant">Submit</string>
     <string name="add_restaurant_button_desc">Add Restaurant</string>
+    <string name="add_restaurant_failed">Restaurant was not added, please try again</string>
 </resources>

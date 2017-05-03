@@ -77,13 +77,14 @@ public class RestClientUsage {
             try {
                 ((RestaurantFormActivity)activity).addRestaurantSuccess(response);
             } catch (JSONException e) {
-                e.printStackTrace();
+                ((RestaurantFormActivity)activity).addRestaurantFailure();
             }
         }
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
         {
-            Log.i("RCU - OnFailure", jsonObject.toString());
+            ((RestaurantFormActivity)activity).addRestaurantFailure();
+            //Log.i("RCU - OnFailure", jsonObject.toString());
         }
     });
     }
