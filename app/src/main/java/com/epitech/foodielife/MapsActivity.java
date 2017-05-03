@@ -169,8 +169,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void addRestaurant() {
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-
+        if (location == null)
+        {
+            Toast.makeText(this, R.string.get_location_failed, Toast.LENGTH_SHORT).show();
+            return ;
+        }
         Intent intent = new Intent(this, RestaurantFormActivity.class);
         intent.putExtra("latitude", location.getLatitude());
         intent.putExtra("longitude", location.getLongitude());
