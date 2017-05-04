@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,15 +96,15 @@ public class DishPostActivity extends AppCompatActivity{
 
     private void submitDishPost(){
         int restaurantId;
-        if (editTextIsSet(mDishName, "\"You did not enter a dish name\"") &&
-                editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"")){
+        if (editTextIsSet(mDishName, "\"You did not enter a dish name\"") == false &&
+                editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"") == false){
             return;
         }
-        if ((restaurantId = getRestaurantIdByName(mRestaurantName.getText().toString())) == 0){
+    /*    if ((restaurantId = getRestaurantIdByName(mRestaurantName.getText().toString())) == 0){
             Toast.makeText(this, "This Restaurant doesn't exist, please create the restaurant.", Toast.LENGTH_SHORT);
             return;
-        }
-        mDish.setIdRestaurant(restaurantId);
+        }*/
+        mDish.setIdRestaurant(1);
         mClient.get_dish(t, mUserInfo, mDish);
     }
 
