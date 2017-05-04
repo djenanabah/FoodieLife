@@ -1,8 +1,11 @@
 package com.epitech.foodielife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
@@ -13,6 +16,7 @@ import com.epitech.foodielife.beans.Dish;
 import com.epitech.foodielife.beans.Mark;
 import com.epitech.foodielife.beans.UserClientInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,11 +29,11 @@ public class DishViewActivity extends AppCompatActivity {
     private RestClientUsage mClient;
     private UserClientInfo mUserInfo;
     private Dish mCurrentDish;
-    private List<Mark> mMarksList;
 
     private TextView mDishName;
     private TextView mDishDecription;
     private ScrollView mMarkScrollView;
+    private Button mAddMark;
 
 
     @Override
@@ -46,7 +50,19 @@ public class DishViewActivity extends AppCompatActivity {
         mDishDecription = (TextView)findViewById(R.id.dish_description);
         mDishDecription.setText(mCurrentDish.getDescription());
         mMarkScrollView = (ScrollView)findViewById(R.id.marks_scroll_view);
-
+        mAddMark = (Button)findViewById(R.id.add_mark);
+        mAddMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Call AddMarkActivity
+                Intent dishPostIntent = new Intent(this, DishPostActivity.class);
+                //dishPostIntent.putExtra("latitude", location.getLatitude());
+                //dishPostIntent.putExtra("longitude", location.getLongitude());
+                dishPostIntent.putExtra("UserClientInfo", userClientInfo);
+                dishPostIntent.putExtra("restaurantList", (Serializable) restaurantList);
+                this.startActivity(dishPostIntent);
+            }
+        });
         Mark mark = new Mark();
         mark.setIdDish(mCurrentDish.getIdDish());
         mClient.get_mark(t, mUserInfo, mark);
@@ -74,7 +90,6 @@ public class DishViewActivity extends AppCompatActivity {
     }
 
     public void getMarkListOnSuccess( List<Mark> marks){
-        mMarksList = marks;
         for (Mark mark: marks) {
             createMarkScrollElem(mark);
         }
@@ -85,10 +100,11 @@ public class DishViewActivity extends AppCompatActivity {
     }
 
     public void addMarkOnSuccess(){
+        finishActivity(RESULT_OK);
 
     }
 
     public void addMarkOnFailure(){
-        Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        Toast.makeText(this, R.string.add_mark_on_failed, Toast.LENGTH_SHORT);
     }
 }

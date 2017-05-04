@@ -56,4 +56,7 @@
 
     <string name="info_title_text">Restaurant Information</string>
     <string name="add_dish_post_on_failed">Post was not save, please try again later</string>
+    <string name="add_dish_post_on_success">The is succefuly create.</string>
+    <string name="add_mark_on_failed">Error Add Mark</string>
+    <string name="add_mark">Add Mark</string>
 </resources>

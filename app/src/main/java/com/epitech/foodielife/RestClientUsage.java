@@ -332,10 +332,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || (resp.getMessage() != "200")) {
-                            ((DishPostActivity)activity).addMarkFailure();
+                            //((DishPostActivity)activity).addMarkFailure();
                         }
                         else {
-                            ((DishPostActivity)activity).addMarkSuccess();
+                            //((DishPostActivity)activity).addMarkSuccess();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -386,9 +386,11 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || !(resp.getMessage().equals("200"))) {
+                            ((DishViewActivity)activity).getMarkOnFailure();
                             // MESSAGE FAILURE
                         }
                         else {
+                            ((DishViewActivity)activity).getMarkListOnSuccess(resp.getList());
                             // MESSAGE SUCCESS
                             // to do resp.getList(); ==> List<Restaurant>
                         }

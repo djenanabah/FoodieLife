@@ -39,6 +39,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -121,7 +122,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         return true;
                     }
                 }
-
+                return false;
             }
         });
     }
@@ -211,6 +212,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //dishPostIntent.putExtra("latitude", location.getLatitude());
         //dishPostIntent.putExtra("longitude", location.getLongitude());
         dishPostIntent.putExtra("UserClientInfo", userClientInfo);
+        dishPostIntent.putExtra("restaurantList", (Serializable) restaurantList);
         this.startActivity(dishPostIntent);
     }
 
@@ -327,7 +329,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void getRestaurantsSuccess(List<Restaurant> list) {
-        restaurantList = list
+        restaurantList = list;
         for (ListIterator<Restaurant> iter = restaurantList.listIterator(); iter.hasNext(); ) {
             Restaurant element = iter.next();
             LatLng pos = new LatLng(element.getLatitude(), element.getLongitude());

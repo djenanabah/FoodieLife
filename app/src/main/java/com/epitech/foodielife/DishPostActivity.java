@@ -28,8 +28,6 @@ public class DishPostActivity extends AppCompatActivity{
 
     private RestClientUsage mClient;
     private UserClientInfo mUserInfo;
-    private double mLongitude;
-    private double mLatitude;
     private Dish mDish;
     private Mark mMark;
 
@@ -53,9 +51,7 @@ public class DishPostActivity extends AppCompatActivity{
 
         mClient = new RestClientUsage(this);
         mUserInfo = (UserClientInfo) getIntent().getSerializableExtra("UserClientInfo");
-        mLatitude = getIntent().getDoubleExtra("latitude", 0.00);
-        mLongitude = getIntent().getDoubleExtra("longitude", 0.00);
-        //mRestaurantList = getIntent().getSerializableExtra("");
+        mRestaurantList = (List<Restaurant>) getIntent().getSerializableExtra("restaurantList");
 
         mDish = new Dish();
         mMark = new Mark();
@@ -79,7 +75,7 @@ public class DishPostActivity extends AppCompatActivity{
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitDishPost();
+                submitAddDish();
             }
         });
     }
@@ -93,7 +89,7 @@ public class DishPostActivity extends AppCompatActivity{
         return true;
     }
 
-    private void submitDishPost(){
+    private void submitAddDish(){
         int restaurantId;
         if (!editTextIsSet(mDishName, "\"You did not enter a dish name\"") &&
                 !editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"")){
@@ -104,7 +100,7 @@ public class DishPostActivity extends AppCompatActivity{
             return;
         }
         mDish.setIdRestaurant(restaurantId);
-        mClient.get_dish(t, mUserInfo, mDish);
+        sendDish();
     }
 
     private int getRestaurantIdByName(String name){
@@ -114,29 +110,6 @@ public class DishPostActivity extends AppCompatActivity{
             }
         }
         return (0);
-    }
-
-    public void getDishListFailure(){
-        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT);
-    }
-
-    public  void getDishListSuccess(List<Dish> dishList){
-        mDishList = dishList;
-        if (isDishExist(mDishName.getText().toString()) == false) {
-            sendDish();
-        } else {
-            sendMark();
-        }
-    }
-
-    private boolean isDishExist(String name){
-        for(Dish dish: mDishList){
-            if (dish.getName().equals(name)){
-                mDish = dish;
-                return (true);
-            }
-        }
-        return false;
     }
 
     private void sendMark(){
@@ -159,23 +132,12 @@ public class DishPostActivity extends AppCompatActivity{
     }
 
     public  void addDishSuccess(){
-        sendMark();
-    }
-
-    public void addMarkFailure(){
-        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT);
-    }
-
-    public void addMarkSuccess() {
+        Toast.makeText(this, R.string.add_dish_post_on_success, Toast.LENGTH_SHORT);
         finishActivity(RESULT_OK);
     }
 
-    public void addDishPostOnFailureMsg(){
-        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT).show();
-    }
 
-
-
+    // Take picture
     private  void captureImage(){
         // Create an implicit intent, for image capture.
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
