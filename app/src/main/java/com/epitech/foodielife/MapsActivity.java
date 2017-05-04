@@ -107,7 +107,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onResume() {
         super.onResume();
         client.get_restaurants(t, (UserClientInfo) (getIntent().getSerializableExtra("UserClientInfo")));
-        if (mMap != null)
+       /* if (mMap != null)
         {
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
@@ -125,7 +125,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 }
             });
-        }
+        }*/
     }
 
     @Override
