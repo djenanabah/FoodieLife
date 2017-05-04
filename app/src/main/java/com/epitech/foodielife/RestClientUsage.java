@@ -51,21 +51,6 @@ public class RestClientUsage {
         this.endRequestAll = false;
         this.activity = activity;
     }
-/*
-    public void  register(RequestParams params) throws JSONException {
-        RestClient.get("adduser", params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
-            {
-
-            }
-        });
-    }*/
 
     public void login(final String value) throws JSONException {
         RequestParams params = new RequestParams();
@@ -80,12 +65,7 @@ public class RestClientUsage {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
             {
-                if (jsonObject != null) {
-                    Log.i("RCU - OnFailure", jsonObject.toString());
-                }
-                else {
-                    Log.i("RCU login - OnFailure", "jsonObject == null");
-                }
+                //Log.i("RCU - OnFailure", jsonObject.toString());
             }
         });
     }
@@ -137,11 +117,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || (resp.getMessage() != "200")) {
-                            // MESSAGE FAILURE
+                            ((RestaurantFormActivity)activity).addRestaurantFailure();
                         }
                         else {
-                            // MESSAGE SUCCESS
-                            // to do
+                            ((RestaurantFormActivity)activity).addRestaurantSuccess();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -188,11 +167,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || !(resp.getMessage().equals("200"))) {
-                            // MESSAGE FAILURE
+                            ((MapsActivity)activity).getRestaurantsFailure();
                         }
                         else {
-                            // MESSAGE SUCCESS
-                            // to do resp.getList(); ==> List<Restaurant>
+                            ((MapsActivity)activity).getRestaurantsSuccess(resp.getList());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -300,13 +278,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || !(resp.getMessage().equals("200"))) {
-                            ((DishPostActivity)activity).getDishListFailure();
-                            // MESSAGE FAILURE
+                            ((RestaurantInfoActivity)activity).retrieveDishesFailure();
                         }
                         else {
-                            ((DishPostActivity)activity).getDishListSuccess(resp.getList());
-                            // MESSAGE SUCCESS
-                            // to do resp.getList(); ==> List<Dish>
+                            ((RestaurantInfoActivity)activity).retrieveDishesSuccess(resp.getList());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -357,10 +332,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || (resp.getMessage() != "200")) {
-                            ((DishPostActivity)activity).addMarkFailure();
+                            ((AddMarkActivity)activity).addMarkOnFailure();
                         }
                         else {
-                            ((DishPostActivity)activity).addMarkSuccess();
+                            ((AddMarkActivity)activity).addMarkOnSuccess();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -411,9 +386,11 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || !(resp.getMessage().equals("200"))) {
+                            ((DishViewActivity)activity).getMarkOnFailure();
                             // MESSAGE FAILURE
                         }
                         else {
+                            ((DishViewActivity)activity).getMarkListOnSuccess(resp.getList());
                             // MESSAGE SUCCESS
                             // to do resp.getList(); ==> List<Restaurant>
                         }

@@ -58,15 +58,10 @@ public class RestaurantFormActivity extends AppCompatActivity {
         });
     }
 
-    public void addRestaurantSuccess(JSONObject response) throws JSONException {
-        if (response.getString("message") == "200") {
-            Intent intent = new Intent(RestaurantFormActivity.this, MapsActivity.class);
-            intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
-            startActivity(intent); // modifier MapsActivity pour qu'il mette le marqueur avant de changer d'activité
-        }
-        else {
-            addRestaurantFailure();
-        }
+    public void addRestaurantSuccess() {
+        Intent intent = new Intent(RestaurantFormActivity.this, MapsActivity.class);
+        intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
+        startActivity(intent);
     }
 
     public void addRestaurantFailure()

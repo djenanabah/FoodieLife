@@ -37,8 +37,10 @@
             android:label="@string/app_name">
         </activity-->
         <activity android:name=".MapsActivity" android:label="@string/app_name" />
-        <activity android:name=".RestaurantFormActivity" />
+        <activity android:name=".RestaurantFormActivity" android:label="@string/app_name" />
         <activity android:name=".DishPostActivity" android:label="@string/app_name" />
+        <activity android:name=".RestaurantInfoActivity" android:label="@string/app_name" />
+        <activity android:name=".DishViewActivity" android:label="@string/app_name" />
     </application>
 
 </manifest>

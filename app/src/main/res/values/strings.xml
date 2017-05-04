@@ -17,6 +17,9 @@
     <string name="server_client_id">463129439514-btmuo8a3veluu4kmqslcvrbv673vmsh2.apps.googleusercontent.com</string>
 -->
 
+    <!-- tsy web ID clients OAuth 2.0-->
+    <string name="server_client_id">11574219439-j8opo7fiibf6ksmld7b96ppsnrm7ehag.apps.googleusercontent.com</string>
+
     <string name="location_permission_denied">This application requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this app.</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
@@ -39,6 +42,8 @@
 
     <string name="get_restaurants_failed">Could not fetch restaurants, please try again later</string>
 
+    <string name="get_dishes_failed">Could not fetch dishes, please try again later</string>
+
     <string name="get_place">Get Place</string>
     <string name="google_place_api">AIzaSyA07u6ZBcxFNTj2Ti_SX05Muuvzl_cdnCE</string>
 
@@ -49,6 +54,9 @@
     <string name="prompt_mark_description">Comment</string>
     <string name="submit_btn">Submit</string>
 
+    <string name="info_title_text">Restaurant Information</string>
     <string name="add_dish_post_on_failed">Post was not save, please try again later</string>
-
+    <string name="add_dish_post_on_success">The is succefuly create.</string>
+    <string name="add_mark_on_failed">Error Add Mark</string>
+    <string name="add_mark">Add Mark</string>
 </resources>
