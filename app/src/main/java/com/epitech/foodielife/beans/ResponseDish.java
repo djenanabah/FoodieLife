@@ -3,19 +3,17 @@ package com.epitech.foodielife.beans;
 import java.util.List;
 
 /**
- *
- * @author Vincent RAGOT
- * @param <T> Template for any class
+ * Created by Vincent RAGOT on 04/05/2017.
  */
-public class Response<T> {
 
+public class ResponseDish {
     private String message;
-    private List<T> list;
+    private List<Dish> list;
 
     /**
      * Constructor
      */
-    public Response() {
+    public ResponseDish() {
     }
 
     /**
@@ -35,15 +33,14 @@ public class Response<T> {
     /**
      * @return the list
      */
-    public List<T> getList() {
+    public List<Dish> getList() {
         return list;
     }
 
     /**
      * @param list the list to set
      */
-    public void setList(List<T> list) {
+    public void setList(List<Dish> list) {
         this.list = list;
     }
-
 }

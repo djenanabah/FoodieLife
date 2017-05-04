@@ -53,6 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private UserClientInfo userClientInfo;
     private TextView userName, userEmail;
     private ImageView userPicture;
+    private Context t = this;
 
 
     @Override
@@ -97,13 +98,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-        client.get_restaurants((UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
+        //client.get_restaurants(t, (UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        client.get_restaurants((UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
+        client.get_restaurants(t, (UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
     }
 
     @Override

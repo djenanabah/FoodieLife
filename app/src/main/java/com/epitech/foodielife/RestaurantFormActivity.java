@@ -1,5 +1,6 @@
 package com.epitech.foodielife;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class RestaurantFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurantform);
+        final Context t = this;
 
         client = new RestClientUsage(this);
         restaurant = new Restaurant();
@@ -51,7 +53,7 @@ public class RestaurantFormActivity extends AppCompatActivity {
                 restaurant.setLatitude(latitude);
                 restaurant.setLongitude(longitude);
 
-                client.add_restaurant(user, restaurant);
+                client.add_restaurant(t, user, restaurant);
             }
         });
     }
