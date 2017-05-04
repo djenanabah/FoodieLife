@@ -95,8 +95,8 @@ public class DishPostActivity extends AppCompatActivity{
 
     private void submitDishPost(){
         int restaurantId;
-        if (editTextIsSet(mDishName, "\"You did not enter a dish name\"") &&
-                editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"")){
+        if (!editTextIsSet(mDishName, "\"You did not enter a dish name\"") &&
+                !editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"")){
             return;
         }
         if ((restaurantId = getRestaurantIdByName(mRestaurantName.getText().toString())) == 0){
