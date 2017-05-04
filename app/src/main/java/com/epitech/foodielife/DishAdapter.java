@@ -31,16 +31,21 @@ public class DishAdapter extends ArrayAdapter<Dish> {
         DishViewHolder viewHolder = (DishViewHolder) convertView.getTag();
         if (viewHolder == null){
             viewHolder = new DishViewHolder();
+            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.description = (TextView)  convertView.findViewById(R.id.description);
-            viewHolder.picture = (ImageView) convertView.findViewById(R.id.picture);
             convertView.setTag(viewHolder);
         }
+       /* Dish dish = getItem(position);
+        if ((dish != null) && (dish.getName() != null) && (dish.getDescription() != null)) {
+            viewHolder.name.setText(dish.getName());
+            viewHolder.description.setText(dish.getDescription());
+        }*/
         return convertView;
     }
 
     public class DishViewHolder {
+        public TextView name;
         public TextView description;
-        public ImageView picture;
     }
 
 }

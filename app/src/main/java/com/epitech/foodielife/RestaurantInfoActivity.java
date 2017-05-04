@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,7 +36,7 @@ public class RestaurantInfoActivity  extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurantform);
+        setContentView(R.layout.activity_restaurantinfo);
 
         client = new RestClientUsage(this);
         restaurant = (Restaurant)getIntent().getSerializableExtra("Restaurant");
@@ -43,7 +44,8 @@ public class RestaurantInfoActivity  extends AppCompatActivity {
 
         List<Info> infos = retrieveInfo();
         infoListView = (ListView)findViewById(R.id.info_list);
-        InfoAdapter infoAdapter = new InfoAdapter(RestaurantInfoActivity.this, infos);
+        InfoAdapter infoAdapter = new InfoAdapter(this, infos);
+        Log.d("toto", String.valueOf(infoListView));
         infoListView.setAdapter(infoAdapter);
         Utility.setListViewHeightBasedOnChildren(infoListView);
     }

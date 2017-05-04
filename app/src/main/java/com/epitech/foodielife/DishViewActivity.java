@@ -39,6 +39,7 @@ public class DishViewActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dishview);
 
         mClient = new RestClientUsage(this);
         mUserInfo =(UserClientInfo) getIntent().getSerializableExtra("UserClientInfo");
@@ -68,7 +69,7 @@ public class DishViewActivity extends AppCompatActivity {
 
     private void createMarkScrollElem(Mark mark){
         LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         TextView userName = new TextView(this);
         userName.setText(mark.getUser());

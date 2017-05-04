@@ -38,6 +38,10 @@ public class InfoAdapter extends ArrayAdapter<Info> {
             viewHolder.content  = (TextView)  convertView.findViewById(R.id.content);
             convertView.setTag(viewHolder);
         }
+
+        Info info = getItem(position);
+        viewHolder.title.setText(info.getTitle());
+        viewHolder.content.setText(info.getInfo());
         return convertView;
     }
 

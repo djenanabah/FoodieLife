@@ -5,11 +5,27 @@ package com.epitech.foodielife.beans;
  */
 
 public class Info {
-    public String title;
-    public String info;
+    private String title;
+    private String info;
 
     public Info(String title, String info) {
+        this.setTitle(title);
+        this.setInfo(info);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
         this.info = info;
     }
 }

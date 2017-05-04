@@ -107,24 +107,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onResume() {
         super.onResume();
         client.get_restaurants(t, (UserClientInfo) (getIntent().getSerializableExtra("UserClientInfo")));
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Intent intent = new Intent(MapsActivity.this, RestaurantInfoActivity.class);
-                for (ListIterator<Restaurant> iter = restaurantList.listIterator(); iter.hasNext(); ) {
-                    Restaurant element = iter.next();
-                    String name = element.getName();
-                    if (name == marker.getTitle()) {
-                        intent.putExtra("Restaurant", element);
-                        intent.putExtra("UserClientInfo", userClientInfo);
-                        MapsActivity.this.startActivity(intent);
-                        return true;
+        if (mMap != null)
+        {
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Intent intent = new Intent(MapsActivity.this, RestaurantInfoActivity.class);
+                    for (ListIterator<Restaurant> iter = restaurantList.listIterator(); iter.hasNext(); ) {
+                        Restaurant element = iter.next();
+                        String name = element.getName();
+                        if (name == marker.getTitle()) {
+                            intent.putExtra("Restaurant", element);
+                            intent.putExtra("UserClientInfo", userClientInfo);
+                            startActivity(intent);
+                            return;
+                        }
                     }
                 }
-                return false;
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -262,6 +263,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Log.d("test", "TESTTTTTTTTTTTTTTTTTTTTTT");
+                Log.d("name", marker.getTitle());
+                Intent intent = new Intent(MapsActivity.this, RestaurantInfoActivity.class);
+                for (Restaurant restaurant: restaurantList) {
+                    String name = restaurant.getName();
+                    Log.d("boucle", name);
+                    if (name.equals(marker.getTitle())) {
+                        intent.putExtra("Restaurant", restaurant);
+                        intent.putExtra("UserClientInfo", userClientInfo);
+                        startActivity(intent);
+                        return;
+                    }
+                }
+            }
+        });
         // Add a marker in Sydney and move the camera
         /*
         LatLng sydney = new LatLng(-34, 151);

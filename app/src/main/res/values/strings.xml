@@ -13,12 +13,12 @@
     <string name="server_client_id">842390643144-ar17dqtijvv8dbnp0ubaiv17icfq7pv8.apps.googleusercontent.com</string>
 -->
     <!--
-    vincent web ID clients OAuth 2.0
+    vincent web ID clients OAuth 2.0 -->
     <string name="server_client_id">463129439514-btmuo8a3veluu4kmqslcvrbv673vmsh2.apps.googleusercontent.com</string>
--->
 
-    <!-- tsy web ID clients OAuth 2.0-->
+    <!-- tsy web ID clients OAuth 2.0
     <string name="server_client_id">11574219439-j8opo7fiibf6ksmld7b96ppsnrm7ehag.apps.googleusercontent.com</string>
+-->
 
     <string name="location_permission_denied">This application requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this app.</string>
