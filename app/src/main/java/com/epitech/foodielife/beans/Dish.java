@@ -20,8 +20,14 @@ public class Dish implements Serializable {
     @Column(name = "description", nullable = true)
     private String description;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+    
     @Id
-    @Column(name = "idRestaurant", unique = true)
+    @Column(name = "idDish", unique = true)
+    private int idDish;
+    
+    @Column(name = "idRestaurant", nullable = false)
     private int idRestaurant;
 
     /**
@@ -72,4 +78,19 @@ public class Dish implements Serializable {
         this.idRestaurant = idRestaurant;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIdDish() {
+        return idDish;
+    }
+
+    public void setIdDish(int idDish) {
+        this.idDish = idDish;
+    }
 }

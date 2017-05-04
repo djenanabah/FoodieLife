@@ -1,15 +1,43 @@
 package com.epitech.foodielife.beans;
 
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+/**
+ *
+ * @author Vincent RAGOT
+ */
+@Entity
+@Table(name = "Restaurant")
 public class Restaurant implements Serializable {
 
+    @Id
+    @Column(name = "idRestaurant", unique = true)
     private int idRestaurant;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "adresse", nullable = false)
     private String adresse;
+
+    @Column(name = "description", nullable = true)
     private String description;
-    private double latitude;
-    private double longitude;
+
+    @Column(name = "longitude", nullable = false)
+    private Double longitude;
+
+    @Column(name = "latitude", nullable = false)
+    private Double latitude;
+
+    /**
+     * Constructor
+     */
+    public Restaurant() {
+    }
 
     /**
      * @return the idRestaurant
@@ -67,11 +95,32 @@ public class Restaurant implements Serializable {
         this.description = description;
     }
 
-    public double getLatitude() { return latitude; }
+    /**
+     * @return the longitude
+     */
+    public Double getLongitude() {
+        return longitude;
+    }
 
-    public void setLatitude(double latitude) { this.latitude = latitude; }
+    /**
+     * @param longitude the longitude to set
+     */
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 
-    public double getLongitude() { return longitude; }
+    /**
+     * @return the lattitude
+     */
+    public Double getLatitude() {
+        return latitude;
+    }
 
-    public void setLongitude(double longitude) { this.longitude = longitude; }
+    /**
+     * @param lattitude the lattitude to set
+     */
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
 }

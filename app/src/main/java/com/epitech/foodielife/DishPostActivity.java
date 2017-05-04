@@ -1,5 +1,6 @@
 package com.epitech.foodielife;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,7 +15,10 @@ import android.widget.Toast;
 
 import com.epitech.foodielife.beans.Dish;
 import com.epitech.foodielife.beans.Mark;
+import com.epitech.foodielife.beans.Restaurant;
 import com.epitech.foodielife.beans.UserClientInfo;
+
+import java.util.List;
 
 /**
  * Created by djena on 02/05/2017.
@@ -38,6 +42,9 @@ public class DishPostActivity extends AppCompatActivity{
     private EditText mMarkdecription;
     private Button mSubmitBtn;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Context t = this;
+    private List<Restaurant> mRestaurantList;
+    private List<Dish> mDishList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,8 @@ public class DishPostActivity extends AppCompatActivity{
         mUserInfo = (UserClientInfo) getIntent().getSerializableExtra("UserClientInfo");
         mLatitude = getIntent().getDoubleExtra("latitude", 0.00);
         mLongitude = getIntent().getDoubleExtra("longitude", 0.00);
+        //mRestaurantList = getIntent().getSerializableExtra("");
+
         mDish = new Dish();
         mMark = new Mark();
 
@@ -85,24 +94,87 @@ public class DishPostActivity extends AppCompatActivity{
     }
 
     private void submitDishPost(){
+        int restaurantId;
         if (editTextIsSet(mDishName, "\"You did not enter a dish name\"") &&
                 editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"")){
             return;
         }
-        //send photo
-        //mDish.setName();
-        //mRestaurantName.getText().toString();
-        //mDishName.getText().toString();
-        mDish.setDescription(mDishDescritption.getText().toString());
+        if ((restaurantId = getRestaurantIdByName(mRestaurantName.getText().toString())) == 0){
+            Toast.makeText(this, "This Restaurant doesn't exist, please create the restaurant.", Toast.LENGTH_SHORT);
+            return;
+        }
+        mDish.setIdRestaurant(restaurantId);
+        mClient.get_dish(t, mUserInfo, mDish);
+    }
+
+    private int getRestaurantIdByName(String name){
+        for(Restaurant rest: mRestaurantList){
+            if (rest.getName().equals(name)){
+                return (rest.getIdRestaurant());
+            }
+        }
+        return (0);
+    }
+
+    public void getDishListFailure(){
+        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT);
+    }
+
+    public  void getDishListSuccess(List<Dish> dishList){
+        mDishList = dishList;
+        if (isDishExist(mDishName.getText().toString()) == false) {
+            sendDish();
+        } else {
+            sendMark();
+        }
+    }
+
+    private boolean isDishExist(String name){
+        for(Dish dish: mDishList){
+            if (dish.getName().equals(name)){
+                mDish = dish;
+                return (true);
+            }
+        }
+        return false;
+    }
+
+    private void sendMark(){
+        mMark.setIdDish(mDish.getIdDish());
+        mMark.setUser(mUserInfo.getName());
         mMark.setStars(mMarkBar.getNumStars());
         mMark.setCommentaire(mMarkdecription.getText().toString());
-        //send the to the server
-        mClient.addDishPost(mUserInfo, mDish, mMark);
+        mClient.add_mark(t, mUserInfo, mMark);
+    }
+
+    private void sendDish(){
+        mDish.setPhoto("toto");
+        mDish.setName(mDishName.getText().toString());
+        mDish.setDescription(mDishDescritption.getText().toString());
+        mClient.add_dish(t, mUserInfo, mDish);
+    }
+
+    public  void addDishFailure(){
+        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT);
+    }
+
+    public  void addDishSuccess(){
+        sendMark();
+    }
+
+    public void addMarkFailure(){
+        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT);
+    }
+
+    public void addMarkSuccess() {
+        finishActivity(RESULT_OK);
     }
 
     public void addDishPostOnFailureMsg(){
         Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT).show();
     }
+
+
 
     private  void captureImage(){
         // Create an implicit intent, for image capture.

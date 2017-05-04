@@ -44,8 +44,7 @@ import java.util.ListIterator;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        NavigationView.OnNavigationItemSelectedListener
-{
+        NavigationView.OnNavigationItemSelectedListener {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
     private GoogleMap mMap;
@@ -55,6 +54,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private TextView userName, userEmail;
     private ImageView userPicture;
     private Button mSignOut;
+    private Context t = this;
 
 
     @Override
@@ -64,7 +64,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //get param UserClientInfo
         final Intent intent = getIntent();
-        userClientInfo = (UserClientInfo)intent.getSerializableExtra("UserClientInfo");
+        userClientInfo = (UserClientInfo) intent.getSerializableExtra("UserClientInfo");
         Log.i("clientInfo name", userClientInfo.getName());
 
         client = new RestClientUsage(this);
@@ -97,20 +97,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        client.get_restaurants((UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
+        //client.get_restaurants(t, (UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        client.get_restaurants((UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
+        client.get_restaurants(t, (UserClientInfo) (getIntent().getSerializableExtra("UserClientInfo")));
     }
 
     @Override
     public void onBackPressed() {
-       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -128,10 +128,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
-    private void initUserViewInfo(){
-        userName = (TextView)findViewById(R.id.userName);
-        userPicture = (ImageView)findViewById(R.id.userPicture);
-        mSignOut = (Button)findViewById(R.id.sign_out_btn);
+    private void initUserViewInfo() {
+        userName = (TextView) findViewById(R.id.userName);
+        userPicture = (ImageView) findViewById(R.id.userPicture);
+        mSignOut = (Button) findViewById(R.id.sign_out_btn);
 
         userName.setText(userClientInfo.getName());
         Glide.with(this).load(userClientInfo.getPictureUrl()).into(userPicture);
@@ -186,7 +186,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     /**
      *  Launch the dish post avtivity
      */
-    private void launchDishPostActivity(){
+    private void launchDishPostActivity() {
         //Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         Intent dishPostIntent = new Intent(this, DishPostActivity.class);
@@ -202,6 +202,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * Launch the add restaurant activity
      */
     private void addRestaurant() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location == null)
         {
