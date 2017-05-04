@@ -1,6 +1,7 @@
 package com.epitech.foodielife;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,21 +26,32 @@ public class DishAdapter extends ArrayAdapter<Dish> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_info,parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_dish_info,parent, false);
         }
 
         DishViewHolder viewHolder = (DishViewHolder) convertView.getTag();
         if (viewHolder == null){
             viewHolder = new DishViewHolder();
-            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.description = (TextView)  convertView.findViewById(R.id.description);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.dishinfo_name);
+            viewHolder.description = (TextView)  convertView.findViewById(R.id.dishinfo_description);
             convertView.setTag(viewHolder);
         }
-       /* Dish dish = getItem(position);
-        if ((dish != null) && (dish.getName() != null) && (dish.getDescription() != null)) {
-            viewHolder.name.setText(dish.getName());
-            viewHolder.description.setText(dish.getDescription());
-        }*/
+       Dish dish = getItem(position);
+        if ((dish != null))
+        {
+          if (dish.getName() != null)
+            {
+                Log.d("test", String.valueOf(viewHolder));
+                Log.d("test1", String.valueOf(viewHolder.name));
+                Log.d("test2", String.valueOf(dish));
+                Log.d("test3", String.valueOf(dish.getName()));
+                viewHolder.name.setText(dish.getName());
+            }
+            if (dish.getDescription() != null)
+            {
+                viewHolder.description.setText(dish.getDescription());
+            }
+        }
         return convertView;
     }
 

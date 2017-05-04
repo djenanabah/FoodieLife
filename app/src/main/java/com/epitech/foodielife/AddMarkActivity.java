@@ -106,7 +106,7 @@ public class AddMarkActivity extends AppCompatActivity{
     }
 
     public void addMarkOnSuccess(){
-        finishActivity(RESULT_OK);
+        onBackPressed();
     }
 
     public void addMarkOnFailure(){

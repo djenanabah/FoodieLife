@@ -111,7 +111,7 @@ public class DishPostActivity extends AppCompatActivity{
 
     public  void addDishSuccess(){
         Toast.makeText(this, R.string.add_dish_post_on_success, Toast.LENGTH_SHORT);
-        finishActivity(RESULT_OK);
+        onBackPressed();
     }
 
 }

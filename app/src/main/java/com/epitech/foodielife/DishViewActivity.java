@@ -64,6 +64,11 @@ public class DishViewActivity extends AppCompatActivity {
                 startActivity(addMarkIntent);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         Mark mark = new Mark();
         mark.setIdDish(mCurrentDish.getIdDish());
         mClient.get_mark(t, mUserInfo, mark);

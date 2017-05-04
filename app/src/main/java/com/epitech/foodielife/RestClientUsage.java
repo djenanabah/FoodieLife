@@ -116,7 +116,7 @@ public class RestClientUsage {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        if ((resp == null) || (resp.getMessage() != "200")) {
+                        if ((resp == null) || !(resp.getMessage().equals("200"))) {
                             ((RestaurantFormActivity)activity).addRestaurantFailure();
                         }
                         else {
@@ -220,7 +220,7 @@ public class RestClientUsage {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        if ((resp == null) || (resp.getMessage() != "200")) {
+                        if ((resp == null) || !(resp.getMessage().equals("200"))) {
                             ((DishPostActivity)activity).addDishFailure();
                             // MESSAGE FAILURE
                         }
@@ -331,7 +331,7 @@ public class RestClientUsage {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        if ((resp == null) || (resp.getMessage() != "200")) {
+                        if ((resp == null) || !(resp.getMessage().equals("200"))) {
                             ((AddMarkActivity)activity).addMarkOnFailure();
                         }
                         else {
