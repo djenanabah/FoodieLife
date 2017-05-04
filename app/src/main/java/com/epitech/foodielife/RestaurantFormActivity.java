@@ -58,14 +58,10 @@ public class RestaurantFormActivity extends AppCompatActivity {
         });
     }
 
-    public void addRestaurantSuccess()  {
-            Intent intent = new Intent(RestaurantFormActivity.this, MapsActivity.class);
-            intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
-            startActivity(intent);
-        }
-        else {
-            addRestaurantFailure();
-        }
+    public void addRestaurantSuccess() {
+        Intent intent = new Intent(RestaurantFormActivity.this, MapsActivity.class);
+        intent.putExtra("UserClientInfo", getIntent().getSerializableExtra("UserClientInfo"));
+        startActivity(intent);
     }
 
     public void addRestaurantFailure()

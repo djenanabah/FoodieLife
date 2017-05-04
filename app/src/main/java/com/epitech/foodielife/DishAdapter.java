@@ -32,7 +32,7 @@ public class DishAdapter extends ArrayAdapter<Dish> {
         if (viewHolder == null){
             viewHolder = new DishViewHolder();
             viewHolder.description = (TextView)  convertView.findViewById(R.id.description);
-            viewHolder.picture = (ImageView) convertView.findViewById(R.id.picture)
+            viewHolder.picture = (ImageView) convertView.findViewById(R.id.picture);
             convertView.setTag(viewHolder);
         }
         return convertView;

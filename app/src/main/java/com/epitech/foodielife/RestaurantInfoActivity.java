@@ -63,7 +63,7 @@ public class RestaurantInfoActivity  extends AppCompatActivity {
     }
 
     private void retrieveDishes() {
-        Dish req_dish = new Dish;
+        Dish req_dish = new Dish();
         req_dish.setIdRestaurant(restaurant.getIdRestaurant());
         client.get_dish((Context)this, userClientInfo, req_dish);
     }
@@ -80,7 +80,7 @@ public class RestaurantInfoActivity  extends AppCompatActivity {
                 ArrayAdapter<Dish> adapter = (ArrayAdapter<Dish>) parent.getAdapter();
                 Dish dish = adapter.getItem((int)id);
 
-                Intent intent = new Intent(this, DishViewActivity.class);
+                Intent intent = new Intent(RestaurantInfoActivity.this, DishViewActivity.class);
                 intent.putExtra("Dish", dish);
                 intent.putExtra("UserClientInfo", userClientInfo);
                 startActivity(intent);
