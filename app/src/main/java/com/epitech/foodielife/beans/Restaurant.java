@@ -1,4 +1,4 @@
-package com.epitech.foodielife;
+package com.epitech.foodielife.beans;
 
 import java.io.Serializable;
 

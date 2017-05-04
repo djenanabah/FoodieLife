@@ -22,9 +22,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="prompt_name">Restaurant Name</string>
-    <string name="prompt_address">Restaurant Address (Optional)</string>7
+    <string name="prompt_address">Restaurant Address (Optional)</string>
     <string name ="prompt_description">Restaurant Description</string>
 
     <string name="action_add_restaurant">Submit</string>
     <string name="add_restaurant_button_desc">Add Restaurant</string>
+
+    <string name="get_place">Get Place</string>
+    <string name="google_place_api">AIzaSyA07u6ZBcxFNTj2Ti_SX05Muuvzl_cdnCE</string>
+
+    <string name="take_picture">add picture</string>
+    <string name="prompt_dish_name">Dish Name</string>
+    <string name="prompt_dish_description">Dish Description</string>
+    <string name="mark_bar">Mark</string>
+    <string name="prompt_mark_description">Comment</string>
+    <string name="submit_btn">Submit</string>
 </resources>

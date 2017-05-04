@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.epitech.foodielife.beans.Restaurant;
+
 /**
  * Created by Tsy-jon on 01/05/2017.
  */
