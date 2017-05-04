@@ -15,7 +15,6 @@
                 android:layout_width="319dp"
                 android:layout_height="129dp"
                 android:layout_margin="25dp"
-                app:srcCompat="@color/white"
                 android:id="@+id/dishImageView" />
 
             <Button
