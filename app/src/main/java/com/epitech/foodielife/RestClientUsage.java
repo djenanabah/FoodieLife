@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.epitech.foodielife.beans.Dish;
 import com.epitech.foodielife.beans.Mark;
 import com.epitech.foodielife.beans.Params;
+import com.epitech.foodielife.beans.ResponseDish;
 import com.epitech.foodielife.beans.ResponseRestaurant;
 import com.epitech.foodielife.beans.Restaurant;
 import com.epitech.foodielife.beans.UserClientInfo;
@@ -49,21 +50,6 @@ public class RestClientUsage {
         this.endRequestAll = false;
         this.activity = activity;
     }
-/*
-    public void  register(RequestParams params) throws JSONException {
-        RestClient.get("adduser", params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
-            {
-
-            }
-        });
-    }*/
 
     public void login(final String value) throws JSONException {
         RequestParams params = new RequestParams();
@@ -112,11 +98,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || (resp.getMessage() != "200")) {
-                            // MESSAGE FAILURE
+                            ((RestaurantFormActivity)activity).addRestaurantFailure();
                         }
                         else {
-                            // MESSAGE SUCCESS
-                            // to do
+                            ((RestaurantFormActivity)activity).addRestaurantSuccess();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -163,11 +148,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || !(resp.getMessage().equals("200"))) {
-                            // MESSAGE FAILURE
+                            ((MapsActivity)activity).getRestaurantsFailure();
                         }
                         else {
-                            // MESSAGE SUCCESS
-                            // to do resp.getList(); ==> List<Restaurant>
+                            ((MapsActivity)activity).getRestaurantsSuccess(resp.getList());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -266,18 +250,17 @@ public class RestClientUsage {
                     @Override
                     public void onResponse(String response) {
                         Log.i("reponse:", response);
-                        ResponseRestaurant resp = null;
+                        ResponseDish resp = null;
                         try {
-                            resp = mapper.readValue(response, ResponseRestaurant.class);
+                            resp = mapper.readValue(response, ResponseDish.class);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         if ((resp == null) || !(resp.getMessage().equals("200"))) {
-                            // MESSAGE FAILURE
+                            ((RestaurantInfoActivity)activity).retrieveDishesFailure();
                         }
                         else {
-                            // MESSAGE SUCCESS
-                            // to do resp.getList(); ==> List<Restaurant>
+                            ((RestaurantInfoActivity)activity).retrieveDishesSuccess(resp.getList());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -354,7 +337,7 @@ public class RestClientUsage {
         queue.add(myReq);
     }
 
-    public void get_dish(Context t, UserClientInfo user, Mark mark)
+    public void get_mark(Context t, UserClientInfo user, Mark mark)
     {
         Params<Mark> params = new Params<>();
         params.setUser(user);

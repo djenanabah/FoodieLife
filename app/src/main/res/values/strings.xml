@@ -43,6 +43,8 @@
 
     <string name="get_restaurants_failed">Could not fetch restaurants, please try again later</string>
 
+    <string name="get_dishes_failed">Could not fetch dishes, please try again later</string>
+
     <string name="get_place">Get Place</string>
     <string name="google_place_api">AIzaSyA07u6ZBcxFNTj2Ti_SX05Muuvzl_cdnCE</string>
 

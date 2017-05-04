@@ -39,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -55,7 +56,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private TextView userName, userEmail;
     private ImageView userPicture;
     private Context t = this;
-    private ArrayList<Restaurant> restaurantList;
+    private List<Restaurant> restaurantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -311,17 +312,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
-    public void getRestaurantsSuccess(JSONObject response) throws JSONException {
-        if (response.getString("message") == "200") {
-            restaurantList = (ArrayList<Restaurant>)response.get("list");
-            for (ListIterator<Restaurant> iter = restaurantList.listIterator(); iter.hasNext(); ) {
-                Restaurant element = iter.next();
-                LatLng pos = new LatLng(element.getLatitude(), element.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(pos).title(element.getName()));
-            }
-        }
-        else {
-            getRestaurantsFailure();
+    public void getRestaurantsSuccess(List<Restaurant> list) {
+        restaurantList = list
+        for (ListIterator<Restaurant> iter = restaurantList.listIterator(); iter.hasNext(); ) {
+            Restaurant element = iter.next();
+            LatLng pos = new LatLng(element.getLatitude(), element.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(pos).title(element.getName()));
         }
     }
 
