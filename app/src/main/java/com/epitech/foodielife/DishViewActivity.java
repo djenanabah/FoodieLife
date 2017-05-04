@@ -55,10 +55,10 @@ public class DishViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Call AddMarkActivity
-                Intent addMarkIntent = new Intent(this, AddMarkActivity.class);
+                Intent addMarkIntent = new Intent(DishViewActivity.this, AddMarkActivity.class);
                 addMarkIntent.putExtra("UserClientInfo", mUserInfo);
                 addMarkIntent.putExtra("Dish",mCurrentDish);
-                this.startActivity(addMarkIntent);
+                startActivity(addMarkIntent);
             }
         });
         Mark mark = new Mark();
