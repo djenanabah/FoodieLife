@@ -55,12 +55,12 @@ public class DishViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Call AddMarkActivity
-                Intent dishPostIntent = new Intent(this, DishPostActivity.class);
+                //Intent dishPostIntent = new Intent(this, DishPostActivity.class);
                 //dishPostIntent.putExtra("latitude", location.getLatitude());
                 //dishPostIntent.putExtra("longitude", location.getLongitude());
-                dishPostIntent.putExtra("UserClientInfo", userClientInfo);
-                dishPostIntent.putExtra("restaurantList", (Serializable) restaurantList);
-                this.startActivity(dishPostIntent);
+                //dishPostIntent.putExtra("UserClientInfo", userClientInfo);
+                //dishPostIntent.putExtra("restaurantList", (Serializable) restaurantList);
+                //this.startActivity(dishPostIntent);
             }
         });
         Mark mark = new Mark();
