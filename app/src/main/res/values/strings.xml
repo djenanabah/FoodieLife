@@ -8,7 +8,10 @@
     <string name="name_display">Name Display Here</string>
     <string name="email_display">Email Display Here</string>
     <string name="logout_google_account">LogOut Google Account</string>
+<!--
+    naba web ID clients OAuth 2.0
     <string name="server_client_id">842390643144-ar17dqtijvv8dbnp0ubaiv17icfq7pv8.apps.googleusercontent.com</string>
+-->
 
     <string name="location_permission_denied">This application requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this app.</string>
@@ -22,7 +25,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="prompt_name">Restaurant Name</string>
-    <string name="prompt_address">Restaurant Address (Optional)</string>7
+    <string name="prompt_address">Restaurant Address (Optional)</string>
     <string name ="prompt_description">Restaurant Description</string>
 
     <string name="get_location_failed">Could not determine current position, please check GPS action status</string>
@@ -31,4 +34,14 @@
     <string name="add_restaurant_failed">Restaurant was not added, please try again later</string>
 
     <string name="get_restaurants_failed">Could not fetch restaurants, please try again later</string>
+
+    <string name="get_place">Get Place</string>
+    <string name="google_place_api">AIzaSyA07u6ZBcxFNTj2Ti_SX05Muuvzl_cdnCE</string>
+
+    <string name="take_picture">add picture</string>
+    <string name="prompt_dish_name">Dish Name</string>
+    <string name="prompt_dish_description">Dish Description</string>
+    <string name="mark_bar">Mark</string>
+    <string name="prompt_mark_description">Comment</string>
+    <string name="submit_btn">Submit</string>
 </resources>

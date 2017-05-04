@@ -3,7 +3,6 @@ package com.epitech.foodielife;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +10,9 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.epitech.foodielife.beans.Restaurant;
+import com.epitech.foodielife.beans.UserClientInfo;
 
 /**
  * Created by Tsy-jon on 01/05/2017.

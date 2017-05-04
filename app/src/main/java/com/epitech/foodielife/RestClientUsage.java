@@ -5,14 +5,12 @@ package com.epitech.foodielife;
  */
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.SystemClock;
 import android.util.Log;
 import org.json.*;
+
+import com.epitech.foodielife.beans.Restaurant;
+import com.epitech.foodielife.beans.UserClientInfo;
 import com.loopj.android.http.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 

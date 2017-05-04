@@ -1,35 +1,28 @@
 package com.epitech.foodielife;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.epitech.foodielife.beans.UserClientInfo;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResolvingResultCallbacks;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 /**
  * Created by Tsy-jon on 30/04/2017.
@@ -37,8 +30,6 @@ import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private LinearLayout Prof_section;
-    private Button SignOut;
     private SignInButton SignIn;
     private GoogleApiClient googleApiClient;
     private UserClientInfo userInfo;
@@ -55,17 +46,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userInfo = new UserClientInfo();
         rclientUsage = new RestClientUsage(this);
         //Views
-        Prof_section = (LinearLayout)findViewById(R.id.prof_section);
-        SignOut = (Button)findViewById(R.id.bn_logout);
         SignIn = (SignInButton)findViewById(R.id.bn_login);
 
         // Button click listeners
         SignIn.setOnClickListener(this);
-        SignOut.setOnClickListener(this);
 
         validateServerClientID();
 
-        Prof_section.setVisibility(View.GONE);
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.server_client_id))
                 .build();
@@ -81,9 +68,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.bn_login:
                 signIn();
-                break;
-            case R.id.bn_logout:
-                signOut();
                 break;
         }
 
@@ -115,15 +99,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResult(@NonNull Status status) {
                 Log.d(TAG, "signOut:onResult: " + status);
-                updateUI(false);
             }
         });
-
     }
     private void handleResult(GoogleSignInResult result){
         if (result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
             String idToken = account.getIdToken();
+            if (idToken == null){
+                Toast.makeText(this, "Erreur: Id Token", Toast.LENGTH_SHORT);
+                return;
+            }
             Log.i(TAG, "ID Token: " + idToken);
             // TODO(user): send token to server and validate server-side
             try {
@@ -134,22 +120,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         else {
-            updateUI(false);
+            Toast.makeText(this, "Google connexion failed", Toast.LENGTH_SHORT).show();
         }
 
     }
-    private void updateUI(boolean isLogin){
-        if (isLogin){
-            //ToDo: go to the mapsActivity
-            Prof_section.setVisibility(View.VISIBLE);
-            SignIn.setVisibility(View.GONE);
-        }
-        else {
-            Prof_section.setVisibility(View.GONE);
-            SignIn.setVisibility(View.VISIBLE);
-        }
 
-    }
+
     public void updateUserInfo(JSONObject response) {
         try {
             userInfo.setName(response.getString("name"));
