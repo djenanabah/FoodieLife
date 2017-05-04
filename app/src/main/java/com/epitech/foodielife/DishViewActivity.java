@@ -34,6 +34,7 @@ public class DishViewActivity extends AppCompatActivity {
     private TextView mDishDecription;
     private ScrollView mMarkScrollView;
     private Button mAddMark;
+    private LinearLayout mMarkElemLayout;
 
 
     @Override
@@ -51,6 +52,7 @@ public class DishViewActivity extends AppCompatActivity {
         mDishDecription = (TextView)findViewById(R.id.dish_description);
         mDishDecription.setText(mCurrentDish.getDescription());
         mMarkScrollView = (ScrollView)findViewById(R.id.marks_scroll_view);
+        mMarkElemLayout = (LinearLayout)findViewById(R.id.mark_layout);
         mAddMark = (Button)findViewById(R.id.add_mark);
         mAddMark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,24 +70,21 @@ public class DishViewActivity extends AppCompatActivity {
     }
 
     private void createMarkScrollElem(Mark mark){
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        mMarkElemLayout.removeAllViews();
 
         TextView userName = new TextView(this);
         userName.setText(mark.getUser());
-        linearLayout.addView(userName);
+        mMarkElemLayout.addView(userName);
 
         RatingBar markRatingBar = new RatingBar(this);
         markRatingBar.setNumStars(5);
         markRatingBar.setStepSize(1.0f);
         markRatingBar.setRating(mark.getStars());
-        linearLayout.addView(markRatingBar);
+        mMarkElemLayout.addView(markRatingBar);
 
         TextView markComment = new TextView(this);
         markComment.setText(mark.getCommentaire());
-        linearLayout.addView(markComment);
-
-        mMarkScrollView.addView(linearLayout);
+        mMarkElemLayout.addView(markComment);
     }
 
     public void getMarkListOnSuccess( List<Mark> marks){
