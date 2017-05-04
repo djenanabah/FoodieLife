@@ -78,7 +78,7 @@ public class RestClientUsage {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
             {
-                Log.i("RCU - OnFailure", jsonObject.toString());
+                //Log.i("RCU - OnFailure", jsonObject.toString());
             }
         });
     }
