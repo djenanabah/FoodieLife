@@ -70,8 +70,6 @@ public class DishViewActivity extends AppCompatActivity {
     }
 
     private void createMarkScrollElem(Mark mark){
-        mMarkElemLayout.removeAllViews();
-
         TextView userName = new TextView(this);
         userName.setText(mark.getUser());
         mMarkElemLayout.addView(userName);
@@ -88,6 +86,7 @@ public class DishViewActivity extends AppCompatActivity {
     }
 
     public void getMarkListOnSuccess( List<Mark> marks){
+        mMarkElemLayout.removeAllViews();
         for (Mark mark: marks) {
             createMarkScrollElem(mark);
         }
