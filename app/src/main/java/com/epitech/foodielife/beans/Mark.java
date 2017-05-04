@@ -29,6 +29,9 @@ public class Mark implements Serializable {
 
     @Column(name = "user", nullable = false)
     private String user;
+    
+    @Column(name = "photo", nullable = false)
+    private String photo;
 
     /**
      * Constructor
@@ -104,6 +107,20 @@ public class Mark implements Serializable {
      */
     public void setUser(String user) {
         this.user = user;
+    }
+
+    /**
+     * @return the photo
+     */
+    public String getPhoto() {
+        return photo;
+    }
+
+    /**
+     * @param photo the photo to set
+     */
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
 }

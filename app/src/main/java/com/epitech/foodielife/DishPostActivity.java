@@ -29,20 +29,14 @@ public class DishPostActivity extends AppCompatActivity{
     private RestClientUsage mClient;
     private UserClientInfo mUserInfo;
     private Dish mDish;
-    private Mark mMark;
 
-    private Button mAddPictureBtn;
-    private ImageView mDishImageView;
+
     private EditText mRestaurantName;
     private EditText mDishName;
     private EditText mDishDescritption;
-    private RatingBar mMarkBar;
-    private EditText mMarkdecription;
     private Button mSubmitBtn;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private Context t = this;
     private List<Restaurant> mRestaurantList;
-    private List<Dish> mDishList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +48,13 @@ public class DishPostActivity extends AppCompatActivity{
         mRestaurantList = (List<Restaurant>) getIntent().getSerializableExtra("restaurantList");
 
         mDish = new Dish();
-        mMark = new Mark();
 
-        mDishImageView = (ImageView)findViewById(R.id.dishImageView);
-        mAddPictureBtn = (Button)findViewById(R.id.addPictureBtn);
+
         mRestaurantName = (EditText)findViewById(R.id.restaurant_name);
         mDishName = (EditText) findViewById(R.id.dish_name);
         mDishDescritption = (EditText) findViewById(R.id.dish_description);
-        //add Mark
-        mMarkBar = (RatingBar) findViewById(R.id.mark_bar);
-        mMarkdecription = (EditText) findViewById(R.id.mark_description);
-        mSubmitBtn = (Button)findViewById(R.id.submit_btn);
 
-        mAddPictureBtn.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                    captureImage();
-            }
-        });
+        mSubmitBtn = (Button)findViewById(R.id.submit_btn);
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,16 +95,9 @@ public class DishPostActivity extends AppCompatActivity{
         return (0);
     }
 
-    private void sendMark(){
-        mMark.setIdDish(mDish.getIdDish());
-        mMark.setUser(mUserInfo.getName());
-        mMark.setStars(mMarkBar.getNumStars());
-        mMark.setCommentaire(mMarkdecription.getText().toString());
-        mClient.add_mark(t, mUserInfo, mMark);
-    }
+
 
     private void sendDish(){
-        mDish.setPhoto("toto");
         mDish.setName(mDishName.getText().toString());
         mDish.setDescription(mDishDescritption.getText().toString());
         mClient.add_dish(t, mUserInfo, mDish);
@@ -136,33 +112,4 @@ public class DishPostActivity extends AppCompatActivity{
         finishActivity(RESULT_OK);
     }
 
-
-    // Take picture
-    private  void captureImage(){
-        // Create an implicit intent, for image capture.
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Start camera and wait for the results.
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        } else {
-            Toast.makeText(this, "Take picture failure", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE){
-            if (resultCode == RESULT_OK){
-                Bitmap bp = (Bitmap) data.getExtras().get("data");
-                mDishImageView.setImageBitmap(bp);
-            }
-            else if (requestCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Action canceled", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Action Failed", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }

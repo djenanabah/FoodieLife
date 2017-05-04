@@ -55,12 +55,10 @@ public class DishViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Call AddMarkActivity
-                //Intent dishPostIntent = new Intent(this, DishPostActivity.class);
-                //dishPostIntent.putExtra("latitude", location.getLatitude());
-                //dishPostIntent.putExtra("longitude", location.getLongitude());
-                //dishPostIntent.putExtra("UserClientInfo", userClientInfo);
-                //dishPostIntent.putExtra("restaurantList", (Serializable) restaurantList);
-                //this.startActivity(dishPostIntent);
+                Intent addMarkIntent = new Intent(this, AddMarkActivity.class);
+                addMarkIntent.putExtra("UserClientInfo", mUserInfo);
+                addMarkIntent.putExtra("Dish",mCurrentDish);
+                this.startActivity(addMarkIntent);
             }
         });
         Mark mark = new Mark();
@@ -97,14 +95,5 @@ public class DishViewActivity extends AppCompatActivity {
 
     public void getMarkOnFailure(){
         Toast.makeText(this, "", Toast.LENGTH_SHORT);
-    }
-
-    public void addMarkOnSuccess(){
-        finishActivity(RESULT_OK);
-
-    }
-
-    public void addMarkOnFailure(){
-        Toast.makeText(this, R.string.add_mark_on_failed, Toast.LENGTH_SHORT);
     }
 }

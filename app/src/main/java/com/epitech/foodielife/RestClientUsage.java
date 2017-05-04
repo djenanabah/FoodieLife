@@ -332,10 +332,10 @@ public class RestClientUsage {
                             e.printStackTrace();
                         }
                         if ((resp == null) || (resp.getMessage() != "200")) {
-                            //((DishPostActivity)activity).addMarkFailure();
+                            ((AddMarkActivity)activity).addMarkOnFailure();
                         }
                         else {
-                            //((DishPostActivity)activity).addMarkSuccess();
+                            ((AddMarkActivity)activity).addMarkOnSuccess();
                         }
                     }
                 }, new Response.ErrorListener() {

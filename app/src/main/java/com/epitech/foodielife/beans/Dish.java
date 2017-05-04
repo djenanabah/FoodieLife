@@ -14,9 +14,6 @@ import javax.persistence.Table;
 @Table(name = "Dish")
 public class Dish implements Serializable {
 
-    @Column(name = "photo", nullable = false)
-    private String photo;
-
     @Column(name = "description", nullable = true)
     private String description;
 
@@ -34,20 +31,6 @@ public class Dish implements Serializable {
      * Constructor
      */
     public Dish() {
-    }
-
-    /**
-     * @return the photo
-     */
-    public String getPhoto() {
-        return photo;
-    }
-
-    /**
-     * @param photo the photo to set
-     */
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     /**
@@ -78,19 +61,32 @@ public class Dish implements Serializable {
         this.idRestaurant = idRestaurant;
     }
 
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return the idDish
+     */
     public int getIdDish() {
         return idDish;
     }
 
+    /**
+     * @param idDish the idDish to set
+     */
     public void setIdDish(int idDish) {
         this.idDish = idDish;
     }
+
 }
