@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private UserClientInfo userClientInfo;
     private TextView userName, userEmail;
     private ImageView userPicture;
+    private Button mSignOut;
 
 
     @Override
@@ -108,7 +110,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -128,11 +130,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void initUserViewInfo(){
         userName = (TextView)findViewById(R.id.userName);
-        userEmail = (TextView)findViewById(R.id.userEmail);
         userPicture = (ImageView)findViewById(R.id.userPicture);
+        mSignOut = (Button)findViewById(R.id.sign_out_btn);
+
         userName.setText(userClientInfo.getName());
-        userEmail.setText(userClientInfo.geteMail());
         Glide.with(this).load(userClientInfo.getPictureUrl()).into(userPicture);
+        mSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishActivity(RESULT_OK);
+            }
+        });
     }
 
     @Override

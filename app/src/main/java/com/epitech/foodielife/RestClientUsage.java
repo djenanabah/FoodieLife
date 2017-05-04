@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.util.Log;
 import org.json.*;
 
+import com.epitech.foodielife.beans.Dish;
+import com.epitech.foodielife.beans.Mark;
 import com.epitech.foodielife.beans.Restaurant;
 import com.epitech.foodielife.beans.UserClientInfo;
 import com.loopj.android.http.*;
@@ -56,11 +58,34 @@ public class RestClientUsage {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject)
             {
-                Log.i("RCU - OnFailure", jsonObject.toString());
+                if (jsonObject != null) {
+                    Log.i("RCU - OnFailure", jsonObject.toString());
+                }
+                else {
+                    Log.i("RCU login - OnFailure", "jsonObject == null");
+                }
             }
         });
     }
 
+    public void addDishPost(UserClientInfo user, Dish dish, Mark mark){
+        RequestParams params = new RequestParams();
+        params.put("user", user);
+        params.put("value", dish);
+        RestClient.post("", params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                //TODO : message on success
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                //TODO : message on failure
+            }
+        });
+    }
 
     public void add_restaurant(UserClientInfo user, Restaurant restaurant)
     {

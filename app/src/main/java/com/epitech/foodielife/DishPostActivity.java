@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.epitech.foodielife.beans.Dish;
 import com.epitech.foodielife.beans.Mark;
+import com.epitech.foodielife.beans.UserClientInfo;
 
 /**
  * Created by djena on 02/05/2017.
@@ -22,6 +23,9 @@ import com.epitech.foodielife.beans.Mark;
 public class DishPostActivity extends AppCompatActivity{
 
     private RestClientUsage mClient;
+    private UserClientInfo mUserInfo;
+    private double mLongitude;
+    private double mLatitude;
     private Dish mDish;
     private Mark mMark;
 
@@ -41,6 +45,9 @@ public class DishPostActivity extends AppCompatActivity{
         setContentView(R.layout.activity_dishpost);
 
         mClient = new RestClientUsage(this);
+        mUserInfo = (UserClientInfo) getIntent().getSerializableExtra("UserClientInfo");
+        mLatitude = getIntent().getDoubleExtra("latitude", 0.00);
+        mLongitude = getIntent().getDoubleExtra("longitude", 0.00);
         mDish = new Dish();
         mMark = new Mark();
 
@@ -82,7 +89,6 @@ public class DishPostActivity extends AppCompatActivity{
                 editTextIsSet(mRestaurantName, "\"You did not enter a  restaurant name\"")){
             return;
         }
-
         //send photo
         //mDish.setName();
         //mRestaurantName.getText().toString();
@@ -91,6 +97,11 @@ public class DishPostActivity extends AppCompatActivity{
         mMark.setStars(mMarkBar.getNumStars());
         mMark.setCommentaire(mMarkdecription.getText().toString());
         //send the to the server
+        mClient.addDishPost(mUserInfo, mDish, mMark);
+    }
+
+    public void addDishPostOnFailureMsg(){
+        Toast.makeText(this, R.string.add_dish_post_on_failed, Toast.LENGTH_SHORT).show();
     }
 
     private  void captureImage(){

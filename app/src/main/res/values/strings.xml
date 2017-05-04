@@ -49,4 +49,7 @@
     <string name="mark_bar">Mark</string>
     <string name="prompt_mark_description">Comment</string>
     <string name="submit_btn">Submit</string>
+
+    <string name="add_dish_post_on_failed">Post was not save, please try again later</string>
+
 </resources>

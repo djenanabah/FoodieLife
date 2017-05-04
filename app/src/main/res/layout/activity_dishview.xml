@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.03">
+
+        <TextView
+            android:text="@string/prompt_dish_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dish_name"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/prompt_dish_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dish_description"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dish Mark"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginBottom="30dp" />
+
+            <ScrollView
+                android:id="@+id/marks_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </ScrollView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
