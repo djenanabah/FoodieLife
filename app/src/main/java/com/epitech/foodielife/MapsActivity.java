@@ -99,9 +99,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+    }
 
-
-        //client.get_restaurants(t, (UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
+    @Override
+    public void onResume() {
+        super.onResume();
+        client.get_restaurants(t, (UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -120,12 +123,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        client.get_restaurants(t, (UserClientInfo)(getIntent().getSerializableExtra("UserClientInfo")));
     }
 
     @Override

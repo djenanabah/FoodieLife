@@ -18,7 +18,6 @@ import com.epitech.foodielife.beans.UserClientInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
 
 /**
  * Created by Tsy-jon on 04/05/2017.
@@ -33,6 +32,7 @@ public class RestaurantInfoActivity  extends AppCompatActivity {
     private ListView dishListView;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurantform);
@@ -50,6 +50,7 @@ public class RestaurantInfoActivity  extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        super.onResume();
         retrieveDishes();
     }
 
