@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,6 +82,7 @@ public class DishPostActivity extends AppCompatActivity{
         if ((restaurantId = getRestaurantIdByName(mRestaurantName.getText().toString())) == 0){
             Toast.makeText(this, "This Restaurant doesn't exist, please create the restaurant.", Toast.LENGTH_SHORT);
             return;
+
         }
         mDish.setIdRestaurant(restaurantId);
         sendDish();
