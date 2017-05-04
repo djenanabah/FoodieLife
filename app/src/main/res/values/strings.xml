@@ -9,9 +9,9 @@
     <string name="email_display">Email Display Here</string>
     <string name="logout_google_account">LogOut Google Account</string>
 <!--
-    naba web ID clients OAuth 2.0 -->
+    naba web ID clients OAuth 2.0
     <string name="server_client_id">842390643144-ar17dqtijvv8dbnp0ubaiv17icfq7pv8.apps.googleusercontent.com</string>
-
+-->
     <!--
     vincent web ID clients OAuth 2.0
     <string name="server_client_id">463129439514-btmuo8a3veluu4kmqslcvrbv673vmsh2.apps.googleusercontent.com</string>
