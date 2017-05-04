@@ -90,9 +90,9 @@ public class DishViewActivity extends AppCompatActivity {
         for (Mark mark: marks) {
             createMarkScrollElem(mark);
         }
+        finishActivity(RESULT_OK);
     }
 
     public void getMarkOnFailure(){
-        Toast.makeText(this, "", Toast.LENGTH_SHORT);
     }
 }
