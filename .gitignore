@@ -1,4 +1,6 @@
-FoodieLife/.idea
+app/google-services.json
+.idea/*
+.idea/
 # Built application files
 *.apk
 *.ap_

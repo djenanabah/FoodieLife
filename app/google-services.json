@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "463129439514",
+    "project_id": "foodielife-fcdbe"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463129439514:android:9e6936ae8496f55b",
+        "android_client_info": {
+          "package_name": "com.epitech.foodielife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463129439514-3di8fk6u0hob40i4bt0mlj3f7hdmrlqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epitech.foodielife",
+            "certificate_hash": "914650beddd649e1964122df2362aa4998cd9b12"
+          }
+        },
+        {
+          "client_id": "463129439514-btmuo8a3veluu4kmqslcvrbv673vmsh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABRjiSxeTC2J0wIBbezG8VomhhKWkmwL0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

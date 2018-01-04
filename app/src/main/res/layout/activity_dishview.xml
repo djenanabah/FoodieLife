@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.03">
+
+        <TextView
+            android:text="@string/prompt_dish_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dish_name"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/prompt_dish_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dish_description"
+            android:layout_weight="1"
+            android:layout_below="@+id/dish_name"/>
+
+        <TextView
+                android:id="@+id/mark_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dish Mark"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginBottom="30dp"
+                android:layout_below="@+id/dish_description"/>
+
+        <ScrollView
+            android:id="@+id/marks_scroll_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@+id/mark_id">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mark_layout"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_mark"
+            android:text="@string/add_mark"
+            android:layout_weight="1"
+            android:layout_below="@+id/marks_scroll_view"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
